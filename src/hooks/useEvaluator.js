@@ -137,27 +137,12 @@ export const useEvaluator = () => {
       setState(EVALUATION_STATES.ERROR);
       setCurrentStage(null);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reset]);
 
-  /**
-   * Calculate overall score from all analysis components
-   */
-  const calculateOverallScore = useCallback((structural, tests, performance) => {
-    const structureScore = structural.qualityScore || 0;
-    const testScore = tests.summary?.score || 0;
-    const performanceScore = calculatePerformanceScore(performance);
-
-    // Weighted average: Structure 30%, Tests 50%, Performance 20%
-    return Math.round((structureScore * 0.3) + (testScore * 0.5) + (performanceScore * 0.2));
-  }, []);
-
-  /**
-   * Calculate performance score based on execution metrics
-   */
+  // Helper functions
   const calculatePerformanceScore = (metrics) => {
     if (!metrics.averageTime) return 100;
-
-    // Score based on average execution time
     if (metrics.averageTime < 10) return 100;
     if (metrics.averageTime < 50) return 90;
     if (metrics.averageTime < 100) return 80;
@@ -166,10 +151,14 @@ export const useEvaluator = () => {
     return 20;
   };
 
-  /**
-   * Generate comprehensive summary
-   */
-  const generateSummary = useCallback((structural, tests, advice, debt) => {
+  const calculateOverallScore = (structural, tests, performance) => {
+    const structureScore = structural.qualityScore || 0;
+    const testScore = tests.summary?.score || 0;
+    const performanceScore = calculatePerformanceScore(performance);
+    return Math.round((structureScore * 0.3) + (testScore * 0.5) + (performanceScore * 0.2));
+  };
+
+  const generateSummary = (structural, tests, advice, debt) => {
     const summary = {
       grade: 'A',
       strengths: [],
@@ -218,7 +207,7 @@ export const useEvaluator = () => {
     }
 
     return summary;
-  }, [calculateOverallScore]);
+  };
 
   /**
    * Get current status message for UI

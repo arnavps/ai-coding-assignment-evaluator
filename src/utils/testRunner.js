@@ -35,9 +35,9 @@ const testSuites = {
       },
       {
         name: 'Large Dataset (10k items)',
-        input: { 
-          nums: Array.from({length: 10000}, (_, i) => i + 1), 
-          target: 19999 
+        input: {
+          nums: Array.from({ length: 10000 }, (_, i) => i + 1),
+          target: 19999
         },
         expected: [9998, 9999],
         category: 'performance'
@@ -164,7 +164,7 @@ const testSuites = {
       },
       {
         name: 'Large Array (10k items)',
-        input: Array.from({length: 10000}, (_, i) => i),
+        input: Array.from({ length: 10000 }, (_, i) => i),
         expected: 9999,
         category: 'performance'
       },
@@ -201,7 +201,7 @@ export const runTestSuite = (code, problemType = 'two-sum') => {
       try {
         // Create a sandboxed environment
         const sandbox = {
-          console: { log: () => {} }, // Disable console.log
+          console: { log: () => { } }, // Disable console.log
           Math,
           Array,
           Object,
@@ -233,9 +233,9 @@ export const runTestSuite = (code, problemType = 'two-sum') => {
 
         // Execute in sandbox
         // Using eval alternative for dynamic code execution
-        const funcBody = `return (${wrappedCode})`; 
-        // eslint-disable-next-line no-eval
-        const func = function() { 
+        const funcBody = `return (${wrappedCode})`;
+        const func = function () {
+          // eslint-disable-next-line no-eval
           return eval(funcBody);
         };
         return func.call(sandbox);
@@ -247,14 +247,14 @@ export const runTestSuite = (code, problemType = 'two-sum') => {
     // Run each test case
     for (const testCase of testSuite.testCases) {
       const startTime = performance.now();
-      
+
       try {
         const result = executeCode(testCase.input);
         const endTime = performance.now();
         const executionTime = endTime - startTime;
 
         const passed = JSON.stringify(result) === JSON.stringify(testCase.expected);
-        
+
         if (passed) {
           passedTests++;
         }
@@ -331,24 +331,24 @@ export const runTestSuite = (code, problemType = 'two-sum') => {
  */
 export const detectProblemType = (code) => {
   const lowerCode = code.toLowerCase();
-  
-  if (lowerCode.includes('twosum') || lowerCode.includes('two sum') || 
-      (lowerCode.includes('target') && lowerCode.includes('nums'))) {
+
+  if (lowerCode.includes('twosum') || lowerCode.includes('two sum') ||
+    (lowerCode.includes('target') && lowerCode.includes('nums'))) {
     return 'two-sum';
   }
-  
+
   if (lowerCode.includes('reverse') || lowerCode.includes('reversal')) {
     return 'string-reversal';
   }
-  
+
   if (lowerCode.includes('palindrome')) {
     return 'palindrome-checker';
   }
-  
+
   if (lowerCode.includes('max') || lowerCode.includes('maximum')) {
     return 'array-max';
   }
-  
+
   return 'two-sum'; // Default
 };
 
@@ -357,7 +357,7 @@ export const detectProblemType = (code) => {
  */
 export const generatePerformanceMetrics = (results) => {
   const executionTimes = results.map(r => r.executionTime).filter(t => t > 0);
-  
+
   if (executionTimes.length === 0) {
     return {
       averageTime: 0,

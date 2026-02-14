@@ -278,7 +278,7 @@ const TechnicalDebtGauge = ({ debt }) => {
   const percentage = debt.score;
   // eslint-disable-next-line no-unused-vars
   const rotation = (percentage * 180) / 100 - 90; // Convert to degrees, offset by -90
-  
+
   const getGaugeColor = (score) => {
     if (score <= 30) return 'var(--pass)';
     if (score <= 60) return 'var(--warn)';
@@ -296,7 +296,7 @@ const TechnicalDebtGauge = ({ debt }) => {
           strokeWidth="12"
           strokeLinecap="round"
         />
-        
+
         {/* Progress arc */}
         <motion.path
           d="M 30 90 A 60 60 0 0 1 170 90"
@@ -309,7 +309,7 @@ const TechnicalDebtGauge = ({ debt }) => {
           animate={{ strokeDasharray: `${(percentage / 100) * 188.5} 188.5` }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         />
-        
+
         {/* Center text */}
         <text x="100" y="70" textAnchor="middle" className="gauge-text">
           <tspan className="gauge-percentage" style={{ fill: getGaugeColor(percentage) }}>

@@ -218,7 +218,7 @@ export const useEvaluator = () => {
     }
 
     return summary;
-  }, []);
+  }, [calculateOverallScore]);
 
   /**
    * Get current status message for UI

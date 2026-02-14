@@ -8,7 +8,7 @@ import { parse } from 'acorn';
 export const analyzeComplexity = (code) => {
   try {
     const ast = parse(code, { ecmaVersion: 2022, sourceType: 'module' });
-    
+
     const analysis = {
       complexity: 'O(1)',
       hasLoops: false,
@@ -35,16 +35,16 @@ export const analyzeComplexity = (code) => {
           currentLoopDepth++;
           maxLoopDepth = Math.max(maxLoopDepth, currentLoopDepth);
           analysis.hasLoops = true;
-          
+
           if (currentLoopDepth > 1) {
             analysis.nestedLoops = true;
           }
-          
+
           // Analyze loop body
           if (node.body) {
             analyzeNode(node.body, currentLoopDepth);
           }
-          
+
           currentLoopDepth--;
           break;
 
@@ -56,11 +56,11 @@ export const analyzeComplexity = (code) => {
 
         case 'VariableDeclarator':
           analysis.variableCount++;
-          
+
           // Check variable naming quality
           if (node.id && node.id.name) {
             const varName = node.id.name;
-            
+
             // Flag 1-2 character variable names (except common iterators)
             if (varName.length <= 2 && !['i', 'j', 'k', 'x', 'y', 'z'].includes(varName)) {
               analysis.variableNamingIssues.push({
@@ -69,7 +69,7 @@ export const analyzeComplexity = (code) => {
                 suggestion: `Consider a more descriptive name instead of '${varName}'`
               });
             }
-            
+
             // Check for camelCase
             if (varName.includes('_') && varName !== varName.toUpperCase()) {
               analysis.variableNamingIssues.push({
@@ -80,7 +80,7 @@ export const analyzeComplexity = (code) => {
             }
           }
           break;
-          
+
         default:
           // Handle unknown node types
           break;
@@ -91,7 +91,7 @@ export const analyzeComplexity = (code) => {
         if (key === 'body' && node.type.includes('Statement')) {
           continue; // Already handled above
         }
-        
+
         const child = node[key];
         if (Array.isArray(child)) {
           child.forEach(item => {
@@ -134,7 +134,7 @@ export const analyzeComplexity = (code) => {
     const namingScore = Math.max(0, 100 - (analysis.variableNamingIssues.length * 15));
     const complexityScore = analysis.nestedLoops ? 40 : analysis.hasLoops ? 70 : 100;
     const structureScore = analysis.functionCount > 0 ? 90 : 80;
-    
+
     analysis.qualityScore = Math.round((namingScore + complexityScore + structureScore) / 3);
     analysis.loopDepth = maxLoopDepth;
 

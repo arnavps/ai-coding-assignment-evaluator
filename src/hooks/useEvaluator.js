@@ -52,7 +52,7 @@ export const useEvaluator = () => {
     if (stageIndex < SCANNING_STAGES.length) {
       const stage = SCANNING_STAGES[stageIndex];
       setCurrentStage(stage);
-      
+
       evaluationTimeoutRef.current = setTimeout(() => {
         updateStage(stageIndex + 1);
       }, stage.duration);
@@ -86,7 +86,7 @@ export const useEvaluator = () => {
       // Logic Gate B: Edge-Case Testing
       setState(EVALUATION_STATES.TESTING);
       setCurrentStage(SCANNING_STAGES[2]);
-      
+
       const problemType = detectProblemType(codeToEvaluate);
       const testResults = runTestSuite(codeToEvaluate, problemType);
       const performanceMetrics = generatePerformanceMetrics(testResults.results || []);
@@ -96,7 +96,7 @@ export const useEvaluator = () => {
 
       // Logic Gate C: Explainability Engine
       setState(EVALUATION_STATES.GENERATING);
-      
+
       const advice = generateAdvice(structuralAnalysis, testResults);
       const technicalDebt = calculateTechnicalDebt(structuralAnalysis, testResults);
 
@@ -142,21 +142,21 @@ export const useEvaluator = () => {
   /**
    * Calculate overall score from all analysis components
    */
-  const calculateOverallScore = (structural, tests, performance) => {
+  const calculateOverallScore = useCallback((structural, tests, performance) => {
     const structureScore = structural.qualityScore || 0;
     const testScore = tests.summary?.score || 0;
     const performanceScore = calculatePerformanceScore(performance);
-    
+
     // Weighted average: Structure 30%, Tests 50%, Performance 20%
     return Math.round((structureScore * 0.3) + (testScore * 0.5) + (performanceScore * 0.2));
-  };
+  }, []);
 
   /**
    * Calculate performance score based on execution metrics
    */
   const calculatePerformanceScore = (metrics) => {
     if (!metrics.averageTime) return 100;
-    
+
     // Score based on average execution time
     if (metrics.averageTime < 10) return 100;
     if (metrics.averageTime < 50) return 90;
@@ -169,7 +169,7 @@ export const useEvaluator = () => {
   /**
    * Generate comprehensive summary
    */
-  const generateSummary = (structural, tests, advice, debt) => {
+  const generateSummary = useCallback((structural, tests, advice, debt) => {
     const summary = {
       grade: 'A',
       strengths: [],
@@ -179,7 +179,7 @@ export const useEvaluator = () => {
 
     // Determine grade based on scores
     const overallScore = calculateOverallScore(structural, tests, { averageTime: 0 });
-    
+
     if (overallScore >= 90) summary.grade = 'A';
     else if (overallScore >= 80) summary.grade = 'B';
     else if (overallScore >= 70) summary.grade = 'C';
@@ -190,11 +190,11 @@ export const useEvaluator = () => {
     if (structural.qualityScore >= 80) {
       summary.strengths.push('Well-structured code with good complexity');
     }
-    
+
     if (tests.summary?.score >= 80) {
       summary.strengths.push('Comprehensive test coverage');
     }
-    
+
     if (structural.variableNamingIssues.length === 0) {
       summary.strengths.push('Excellent variable naming conventions');
     }
@@ -203,11 +203,11 @@ export const useEvaluator = () => {
     if (structural.nestedLoops) {
       summary.improvements.push('Optimize nested loops for better performance');
     }
-    
+
     if (tests.summary?.score < 80) {
       summary.improvements.push('Improve test case handling');
     }
-    
+
     if (debt.score > 50) {
       summary.improvements.push('Reduce technical debt');
     }
@@ -218,7 +218,7 @@ export const useEvaluator = () => {
     }
 
     return summary;
-  };
+  }, []);
 
   /**
    * Get current status message for UI
@@ -245,9 +245,9 @@ export const useEvaluator = () => {
   /**
    * Check if evaluator is busy
    */
-  const isProcessing = state !== EVALUATION_STATES.IDLE && 
-                      state !== EVALUATION_STATES.COMPLETED && 
-                      state !== EVALUATION_STATES.ERROR;
+  const isProcessing = state !== EVALUATION_STATES.IDLE &&
+    state !== EVALUATION_STATES.COMPLETED &&
+    state !== EVALUATION_STATES.ERROR;
 
   return {
     // State
@@ -257,16 +257,16 @@ export const useEvaluator = () => {
     error,
     code,
     isProcessing,
-    
+
     // Actions
     evaluateCode,
     reset,
     setCode,
-    
+
     // Computed
     statusMessage: getStatusMessage(),
     hasResults: state === EVALUATION_STATES.COMPLETED && results !== null,
-    
+
     // Constants
     EVALUATION_STATES,
     SCANNING_STAGES

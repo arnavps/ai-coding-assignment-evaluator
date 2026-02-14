@@ -205,7 +205,6 @@ export const generateAdvice = (structuralAnalysis, testResults) => {
   };
 
   const issues = [];
-  const suggestions = [];
 
   // Analyze structural issues
   if (structuralAnalysis.issues) {
@@ -222,7 +221,7 @@ export const generateAdvice = (structuralAnalysis, testResults) => {
             });
           }
           break;
-          
+
         case 'naming':
           issues.push({
             type: 'readability',
@@ -232,7 +231,7 @@ export const generateAdvice = (structuralAnalysis, testResults) => {
             suggestion: issue.suggestion
           });
           break;
-          
+
         case 'syntax':
           issues.push({
             type: 'correctness',
@@ -240,6 +239,17 @@ export const generateAdvice = (structuralAnalysis, testResults) => {
             category: 'syntax-error',
             message: issue.message,
             suggestion: issue.suggestion
+          });
+          break;
+
+        default:
+          // Handle unknown issue types
+          issues.push({
+            type: 'unknown',
+            severity: issue.severity,
+            category: 'unclassified',
+            message: issue.message,
+            suggestion: 'Review this issue manually'
           });
           break;
       }
@@ -258,7 +268,7 @@ export const generateAdvice = (structuralAnalysis, testResults) => {
           suggestion: 'Add proper input validation and edge case handling'
         });
       }
-      
+
       if (result.executionTime > 1000) {
         issues.push({
           type: 'performance',
@@ -273,11 +283,11 @@ export const generateAdvice = (structuralAnalysis, testResults) => {
 
   // Generate advice based on identified issues
   const processedCategories = new Set();
-  
+
   issues.forEach(issue => {
     if (!processedCategories.has(issue.category)) {
       processedCategories.add(issue.category);
-      
+
       const template = adviceTemplates[issue.type]?.[issue.category];
       if (template) {
         advice.specific.push({
@@ -294,7 +304,7 @@ export const generateAdvice = (structuralAnalysis, testResults) => {
   // Generate overall assessment
   const criticalIssues = issues.filter(i => i.severity === 'high').length;
   const mediumIssues = issues.filter(i => i.severity === 'medium').length;
-  
+
   if (criticalIssues > 0) {
     advice.overall = `Your code has ${criticalIssues} critical issue${criticalIssues > 1 ? 's' : ''} that need immediate attention. Focus on correctness before optimization.`;
     advice.priority = 'high';
@@ -317,7 +327,7 @@ export const generateAdvice = (structuralAnalysis, testResults) => {
  */
 const generateNextSteps = (issues, structuralAnalysis, testResults) => {
   const steps = [];
-  
+
   // Prioritize correctness issues
   const correctnessIssues = issues.filter(i => i.type === 'correctness');
   if (correctnessIssues.length > 0) {
@@ -328,7 +338,7 @@ const generateNextSteps = (issues, structuralAnalysis, testResults) => {
       estimatedTime: '15-30 minutes'
     });
   }
-  
+
   // Performance optimization
   const performanceIssues = issues.filter(i => i.type === 'performance');
   if (performanceIssues.length > 0) {
@@ -339,7 +349,7 @@ const generateNextSteps = (issues, structuralAnalysis, testResults) => {
       estimatedTime: '30-60 minutes'
     });
   }
-  
+
   // Code readability
   const readabilityIssues = issues.filter(i => i.type === 'readability');
   if (readabilityIssues.length > 0) {
@@ -350,7 +360,7 @@ const generateNextSteps = (issues, structuralAnalysis, testResults) => {
       estimatedTime: '10-20 minutes'
     });
   }
-  
+
   // Add comprehensive testing step if test coverage is low
   if (testResults.summary && testResults.summary.score < 80) {
     steps.push({
@@ -360,7 +370,7 @@ const generateNextSteps = (issues, structuralAnalysis, testResults) => {
       estimatedTime: '20-40 minutes'
     });
   }
-  
+
   return steps;
 };
 
@@ -370,7 +380,7 @@ const generateNextSteps = (issues, structuralAnalysis, testResults) => {
 export const calculateTechnicalDebt = (structuralAnalysis, testResults) => {
   let debtScore = 0;
   let maxDebt = 100;
-  
+
   // Structural issues contribute to debt
   if (structuralAnalysis.issues) {
     structuralAnalysis.issues.forEach(issue => {
@@ -379,24 +389,25 @@ export const calculateTechnicalDebt = (structuralAnalysis, testResults) => {
         case 'high': debtScore += 15; break;
         case 'medium': debtScore += 10; break;
         case 'low': debtScore += 5; break;
+        default: debtScore += 3; break;
       }
     });
   }
-  
+
   // Test failures contribute to debt
   if (testResults.summary) {
     const failedTests = testResults.summary.total - testResults.summary.passed;
     debtScore += failedTests * 8;
   }
-  
+
   // Performance issues
   if (testResults.summary?.performanceIssues?.length > 0) {
     debtScore += testResults.summary.performanceIssues.length * 12;
   }
-  
+
   // Cap at 100
   debtScore = Math.min(debtScore, maxDebt);
-  
+
   return {
     score: debtScore,
     level: debtScore > 70 ? 'high' : debtScore > 40 ? 'medium' : 'low',

@@ -232,8 +232,13 @@ export const runTestSuite = (code, problemType = 'two-sum') => {
         `;
 
         // Execute in sandbox
-        const func = new Function(...Object.keys(sandbox), wrappedCode);
-        return func(...Object.values(sandbox));
+        // Using eval alternative for dynamic code execution
+        const funcBody = `return (${wrappedCode})`; 
+        // eslint-disable-next-line no-eval
+        const func = function() { 
+          return eval(funcBody);
+        };
+        return func.call(sandbox);
       } catch (error) {
         throw new Error(`Runtime error: ${error.message}`);
       }

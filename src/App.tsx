@@ -178,34 +178,34 @@ const App: React.FC = () => {
                   shadow-2xl shadow-black/30"
       >
         {/* Logo */}
-        <motion.div 
+        <motion.div
           className="font-garamond italic text-2xl font-bold text-text-header"
           whileHover={{ scale: 1.05 }}
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           LINT-PRO
         </motion.div>
-      
+
         {/* Navigation Links */}
         <div className="flex gap-8 font-helvetica text-sm font-medium text-text-secondary-muted">
-          <motion.a 
-            href="#analyzer" 
+          <motion.a
+            href="#analyzer"
             className="hover:text-text-header transition-colors relative px-3 py-1 rounded-full hover:bg-white/5"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Analyzer
           </motion.a>
-          <motion.a 
-            href="#benchmarks" 
+          <motion.a
+            href="#benchmarks"
             className="hover:text-text-header transition-colors relative px-3 py-1 rounded-full hover:bg-white/5"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Benchmarks
           </motion.a>
-          <motion.a 
-            href="#docs" 
+          <motion.a
+            href="#docs"
             className="hover:text-text-header transition-colors relative px-3 py-1 rounded-full hover:bg-white/5"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -213,19 +213,19 @@ const App: React.FC = () => {
             Docs
           </motion.a>
         </div>
-      
+
         {/* Status Indicator */}
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${state === 'idle' ? 'bg-text-secondary' :
-                state === 'completed' ? 'bg-success' :
-                  state === 'error' ? 'bg-error' : 'bg-warning animate-pulse'
+              state === 'completed' ? 'bg-success' :
+                state === 'error' ? 'bg-error' : 'bg-warning animate-pulse'
               }`} />
             <span className="text-text-secondary-muted text-xs font-medium">
               {statusMessage}
             </span>
           </div>
-                
+
           {progress > 0 && progress < 100 && (
             <div className="w-20 h-1 bg-border-default/30 rounded-full overflow-hidden">
               <motion.div
@@ -236,9 +236,9 @@ const App: React.FC = () => {
               />
             </div>
           )}
-                
+
           {/* CTA Button */}
-          <motion.button 
+          <motion.button
             className="bg-accent-electric-cyan hover:bg-accent-electric-cyan/90 text-midnight-obsidian px-4 py-2 rounded-full text-xs font-bold transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -399,7 +399,7 @@ const App: React.FC = () => {
             <span>Precision Engineering</span>
           </div>
         </div>
-              
+
         <div className="flex items-center gap-6 text-xs text-text-secondary-muted">
           <span>AST Analysis</span>
           <span>•</span>

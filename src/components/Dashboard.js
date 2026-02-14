@@ -276,6 +276,7 @@ const Dashboard = ({ results }) => {
  */
 const TechnicalDebtGauge = ({ debt }) => {
   const percentage = debt.score;
+  // eslint-disable-next-line no-unused-vars
   const rotation = (percentage * 180) / 100 - 90; // Convert to degrees, offset by -90
   
   const getGaugeColor = (score) => {

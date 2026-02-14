@@ -80,6 +80,10 @@ export const analyzeComplexity = (code) => {
             }
           }
           break;
+          
+        default:
+          // Handle unknown node types
+          break;
       }
 
       // Recursively analyze child nodes

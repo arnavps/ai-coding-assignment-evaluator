@@ -1,162 +1,195 @@
-# LINT-PRO - Deep AI Coding Evaluator
+<div style="font-family: 'Apple Garamond', Baskerville, serif; line-height: 1.8;">
 
-A sophisticated React-based code evaluation engine that processes submissions through three logic gates: Structural Analysis (AST), Edge-Case Interrogation, and an Explainability Engine with senior developer recommendations.
+# LINT-PRO: Production-Ready AI Coding Evaluator
 
-## 🚀 Features
+<div style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300; font-size: 1.2em; color: #666; margin: 1em 0;">
+  Precision Engineering for Code Quality Assessment
+</div>
 
-### Logic Gate A: Structural Analysis (AST)
-- **Complexity Detection**: Identifies O(n²) nested loops vs O(n) single loops
-- **Variable Naming Quality**: Flags 1-2 character variable names (x, y, i, j)
-- **Code Structure Analysis**: Function counting, variable tracking, and pattern detection
-- **Real-time AST Parsing**: Uses Acorn for accurate JavaScript parsing
+---
 
-### Logic Gate B: Edge-Case Interrogation
-- **Comprehensive Test Suites**: Pre-built test cases for common problems (Two Sum, String Reversal, Palindrome Checker, Array Max)
-- **Edge Case Coverage**: Empty input, null/undefined, single elements, large datasets (10k+ items)
-- **Performance Metrics**: Execution time tracking and performance issue identification
-- **Mock Test Runner**: Safe sandboxed code execution environment
+## The Why: Bridging the Context Gap in Coding Assessments
 
-### Logic Gate C: Explainability Engine
-- **Senior Dev Advice**: Maps specific failures to constructive, actionable recommendations
-- **Code Examples**: Provides optimized code examples for common issues
-- **Technical Debt Analysis**: Calculates and visualizes technical debt with actionable insights
-- **Priority-based Recommendations**: Next steps with time estimates
+<div style="font-family: 'Apple Garamond', Baskerville, serif; font-size: 1.1em; line-height: 1.9; color: #333; background: #f9f9f9; padding: 2em; border-radius: 8px; border-left: 4px solid #00FF94;">
+
+Traditional code evaluation tools suffer from a critical **Context Gap** – they analyze syntax and structure but miss the deeper semantic understanding that separates professional code from functional code. 
+
+LINT-PRO addresses this gap through a revolutionary **Logic Interrogator** engine that doesn't just check for errors, but understands code intent, performance implications, and maintainability patterns. Our three-gate approach (Structural Analysis → Edge-Case Interrogation → Explainability Engine) provides the comprehensive feedback that developers actually need to improve their craft.
+
+</div>
+
+---
+
+## 🏗️ Architecture Overview
+
+### Modular Codebase Structure
+```
+src/
+├── engine/              # Core evaluation logic
+│   ├── LogicInterrogator.ts    # Big-O detection & pattern matching
+│   └── EvaluationEngine.ts     # Scoring orchestration
+├── components/          # React UI components
+│   ├── CodeEditor.tsx          # Precision code input
+│   └── EvaluationDashboard.tsx # Results visualization
+├── hooks/              # Custom React hooks
+│   └── useEvaluation.ts        # Evaluation state management
+├── types/              # TypeScript definitions
+│   └── index.ts               # Comprehensive type system
+└── docs/               # Documentation
+    ├── API.md                # API reference
+    └── SCORING.md            # Scoring methodology
+```
+
+---
+
+## 🧠 The Logic Interrogator: Advanced Code Analysis
+
+### Big-O Complexity Detection
+Our engine uses sophisticated pattern matching and AST analysis to detect:
+
+- **Time Complexity**: O(1), O(n), O(n log n), O(n²), O(2ⁿ)
+- **Space Complexity**: Memory allocation patterns and optimization opportunities
+- **Loop Nesting**: Automatic detection of nested loops and their depth
+- **Recursive Patterns**: Identification of recursive functions and potential stack overflow risks
+
+### Pattern Matching Engine
+```typescript
+// Example: Detecting O(n²) nested loops
+const complexityPatterns = [
+  {
+    pattern: /for\s*\([^)]+\)\s*{[^}]*for\s*\(/g,
+    complexity: 'O(n²)',
+    description: 'Nested loop detected'
+  }
+];
+```
+
+### Silent Failure Simulation
+We generate comprehensive edge cases to catch silent failures:
+- **Empty Input**: `""`, `[]`, `null`, `undefined`
+- **Boundary Conditions**: Single elements, maximum values
+- **Large Datasets**: 10k+ items for performance testing
+- **Type Mismatches**: Unexpected input types
+
+---
+
+## 📊 The Scoring Formula: 100-Point System
+
+Our scoring system is transparent, weighted, and designed to reflect real-world code quality:
+
+### Weight Distribution
+| Component | Weight | Focus Area |
+|-----------|---------|------------|
+| **Correctness** | **40%** | Test pass rate, edge case handling |
+| **Efficiency** | **30%** | Time/space complexity, performance |
+| **Readability** | **20%** | Code clarity, naming, documentation |
+| **Best Practices** | **10%** | Security, SOLID principles, patterns |
+
+### Calculation Formula
+```typescript
+const overallScore = 
+  (correctness.score * 0.40) +
+  (efficiency.score * 0.30) +
+  (readability.score * 0.20) +
+  (bestPractices.score * 0.10);
+```
+
+### Grade Assignment
+- **A** (90-100): Professional-level code
+- **B** (80-89): Strong implementation with minor improvements
+- **C** (70-79): Functional but needs optimization
+- **D** (60-69): Significant issues requiring attention
+- **F** (0-59): Critical problems, fundamental redesign needed
+
+---
 
 ## 🎨 Precision Engineering Aesthetic
 
-### Typography
-- **Main UI**: Helvetica Neue (Clean, neutral, authoritative)
-- **Feedback/Narrative**: Apple Garamond (Academic, classic, trustworthy)
+### Typography System
+- **Primary UI**: `Helvetica Neue` (Clean, authoritative data display)
+- **Mentorship Voice**: `Apple Garamond` (Academic, trustworthy feedback)
 
-### Visual Design
-- **Background**: Deep Charcoal (#0B0B0B) with CSS-grid pattern overlay
-- **Color Scheme**: High-contrast CSS variables
-  - Pass: #00FF94
-  - Warn: #FFD600  
-  - Fail: #FF0055
-- **Scanning Animation**: Staggered text reveals during analysis
-- **Technical Debt Gauge**: Animated semi-circle SVG visualization
+### Midnight Obsidian Theme
+```css
+:root {
+  --color-midnight-obsidian: #0B0B0B;    /* Primary background */
+  --color-obsidian-secondary: #1A1A1A;  /* Cards & panels */
+  --color-success: #00FF94;              /* Pass states */
+  --color-warning: #FFD600;              /* Warning states */
+  --color-error: #FF0055;                /* Error states */
+}
+```
+
+### Animation System
+- **Staggered Reveal**: Results appear sequentially with spring physics
+- **Typing Effect**: Mentorship text types out character by character
+- **Progressive Loading**: Visual feedback through evaluation phases
+
+---
 
 ## 🛠️ Technology Stack
 
-- **React 18**: Modern React with hooks
-- **Framer Motion**: Staggered entrance animations and micro-interactions
-- **Acorn**: JavaScript AST parsing
-- **CSS Variables**: Consistent theming and design system
-- **Responsive Design**: Mobile-first approach
+### Core Technologies
+- **React 18** with TypeScript for type safety
+- **Tailwind CSS** for utility-first styling
+- **Framer Motion** for sophisticated animations
+- **Acorn** for JavaScript AST parsing
 
-## 📁 Project Structure
+### Development Tools
+- **ESLint** with TypeScript rules
+- **PostCSS** for CSS processing
+- **JSDoc** for comprehensive documentation
+- **SOLID Principles** throughout architecture
 
-```
-src/
-├── components/
-│   ├── Dashboard.js          # Main results dashboard with animations
-│   ├── Dashboard.css         # Dashboard styling
-│   ├── CodeEditor.js         # Code input with scanning overlay
-│   └── CodeEditor.css        # Editor styling
-├── hooks/
-│   └── useEvaluator.js       # Main evaluation state management
-├── utils/
-│   ├── astAnalyzer.js        # Logic Gate A: Structural analysis
-│   ├── testRunner.js         # Logic Gate B: Test suite execution
-│   └── explainabilityEngine.js # Logic Gate C: Senior dev advice
-├── App.js                    # Main application component
-├── App.css                   # App-level styling
-├── index.js                  # React entry point
-└── index.css                 # Global styles and CSS variables
-```
+---
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
 - Node.js 16+ 
 - npm or yarn
+- Modern web browser
 
 ### Installation
 
-1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd ai-coding-evaluator
-```
+# Clone the repository
+git clone https://github.com/your-org/lint-pro.git
+cd lint-pro
 
-2. Install dependencies:
-```bash
+# Install dependencies
 npm install
-```
 
-3. Start the development server:
-```bash
+# Start development server
 npm start
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+### Your First Evaluation
 
-### Build for Production
-```bash
-npm run build
-```
+1. **Open** http://localhost:3000 in your browser
+2. **Paste** your JavaScript code in the editor
+3. **Click** "Evaluate Code" to begin analysis
+4. **Watch** the staggered reveal of results
+5. **Review** the comprehensive feedback and refactor suggestions
 
-## 📊 Usage
+### Sample Code to Try
 
-1. **Enter Code**: Paste or write JavaScript code in the editor
-2. **Sample Code**: Use provided samples for Two Sum, String Reversal, or Nested Loops
-3. **Evaluate**: Click "Evaluate Code" to run through all three logic gates
-4. **Review Results**: View comprehensive analysis with:
-   - Overall grade (A-F) and score
-   - Technical debt gauge
-   - Structural analysis metrics
-   - Test results and performance metrics
-   - Strengths and improvement areas
-   - Senior developer recommendations
-   - Actionable next steps
-
-## 🔧 Core Components
-
-### useEvaluator Hook
-Manages the complete evaluation lifecycle:
-- State management (Idle → Processing → Success)
-- Scanning stage animations
-- Error handling and recovery
-- Results aggregation
-
-### Dashboard Component
-Features Framer Motion animations:
-- Staggered entrance effects
-- Technical debt gauge animation
-- Hover states and micro-interactions
-- Responsive grid layouts
-
-### Analysis Engines
-
-#### AST Analyzer (`astAnalyzer.js`)
 ```javascript
-const analysis = analyzeComplexity(code);
-// Returns complexity, loop detection, naming issues, quality score
-```
-
-#### Test Runner (`testRunner.js`)
-```javascript
-const results = runTestSuite(code, problemType);
-// Returns test results, performance metrics, edge case coverage
-```
-
-#### Explainability Engine (`explainabilityEngine.js`)
-```javascript
-const advice = generateAdvice(structuralAnalysis, testResults);
-// Returns senior dev recommendations, code examples, next steps
-```
-
-## 🎯 Supported Problem Types
-
-- **Two Sum**: Array-based target sum problem
-- **String Reversal**: String manipulation and edge cases
-- **Palindrome Checker**: Algorithmic thinking and validation
-- **Array Maximum**: Basic array operations and performance
-
-## 🔍 Analysis Features
-
-### Structural Analysis
+// Two Sum - Optimal Solution
+function twoSum(nums, target) {
+  const map = new Map();
+  
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+    
+    if (map.has(complement)) {
+      return [map.get(complement), i];
+    }
+    
+    map.set(nums[i], i);
+  }
+  
+  return [];
 - Loop nesting detection (O(n²) vs O(n))
 - Variable naming convention checking
 - Function and variable counting

@@ -117,8 +117,8 @@ const DiffView: React.FC<DiffViewProps> = ({
               <button
                 onClick={() => setActiveTab('side-by-side')}
                 className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${activeTab === 'side-by-side'
-                    ? 'bg-slate-700 text-white border-b-2 border-b-cyan-400'
-                    : 'text-slate-400 hover:text-slate-300 hover:bg-slate-800'
+                  ? 'bg-slate-700 text-white border-b-2 border-b-cyan-400'
+                  : 'text-slate-400 hover:text-slate-300 hover:bg-slate-800'
                   }`}
               >
                 Side by Side
@@ -126,8 +126,8 @@ const DiffView: React.FC<DiffViewProps> = ({
               <button
                 onClick={() => setActiveTab('line-by-line')}
                 className={`flex-1 px-4 py-3 text-sm font-medium transition-colors ${activeTab === 'line-by-line'
-                    ? 'bg-slate-700 text-white border-b-2 border-b-cyan-400'
-                    : 'text-slate-400 hover:text-slate-300 hover:bg-slate-800'
+                  ? 'bg-slate-700 text-white border-b-2 border-b-cyan-400'
+                  : 'text-slate-400 hover:text-slate-300 hover:bg-slate-800'
                   }`}
               >
                 Line by Line

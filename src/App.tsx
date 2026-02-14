@@ -167,51 +167,89 @@ const App: React.FC = () => {
       animate="visible"
       className="min-h-screen bg-midnight-obsidian text-text-primary font-helvetica"
     >
-      {/* Header */}
-      <motion.header
+      {/* Floating Pill Navbar */}
+      <motion.nav
         variants={headerVariants}
-        className="bg-obsidian-secondary/70 border-b border-white/10 sticky top-0 z-50 backdrop-blur-sm"
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-50
+                  w-[70%] max-w-4xl px-6 py-3
+                  bg-midnight-obsidian/10 backdrop-blur-lg
+                  border border-white/10 rounded-full
+                  flex items-center justify-between
+                  shadow-2xl shadow-black/30"
       >
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-success to-warning bg-clip-text text-transparent">
-                LINT-PRO
-              </h1>
-              <p className="font-garamond text-text-secondary-muted mt-2 text-lg">
-                Production-ready AI Coding Evaluator with Precision Engineering
-              </p>
-            </div>
-
-            {/* Status Indicator */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <div className={`w-3 h-3 rounded-full ${state === 'idle' ? 'bg-text-secondary' :
-                    state === 'completed' ? 'bg-success' :
-                      state === 'error' ? 'bg-error' : 'bg-warning animate-pulse'
-                  }`} />
-                <span className="text-text-secondary text-sm font-medium">
-                  {statusMessage}
-                </span>
-              </div>
-
-              {progress > 0 && progress < 100 && (
-                <div className="w-32 h-2 bg-border-default rounded-full overflow-hidden">
-                  <motion.div
-                    className="h-full bg-success"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progress}%` }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
-              )}
-            </div>
-          </div>
+        {/* Logo */}
+        <motion.div 
+          className="font-garamond italic text-2xl font-bold text-text-header"
+          whileHover={{ scale: 1.05 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          LINT-PRO
+        </motion.div>
+      
+        {/* Navigation Links */}
+        <div className="flex gap-8 font-helvetica text-sm font-medium text-text-secondary-muted">
+          <motion.a 
+            href="#analyzer" 
+            className="hover:text-text-header transition-colors relative px-3 py-1 rounded-full hover:bg-white/5"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Analyzer
+          </motion.a>
+          <motion.a 
+            href="#benchmarks" 
+            className="hover:text-text-header transition-colors relative px-3 py-1 rounded-full hover:bg-white/5"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Benchmarks
+          </motion.a>
+          <motion.a 
+            href="#docs" 
+            className="hover:text-text-header transition-colors relative px-3 py-1 rounded-full hover:bg-white/5"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Docs
+          </motion.a>
         </div>
-      </motion.header>
+      
+        {/* Status Indicator */}
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <div className={`w-2 h-2 rounded-full ${state === 'idle' ? 'bg-text-secondary' :
+                state === 'completed' ? 'bg-success' :
+                  state === 'error' ? 'bg-error' : 'bg-warning animate-pulse'
+              }`} />
+            <span className="text-text-secondary-muted text-xs font-medium">
+              {statusMessage}
+            </span>
+          </div>
+                
+          {progress > 0 && progress < 100 && (
+            <div className="w-20 h-1 bg-border-default/30 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-accent-electric-cyan"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.3 }}
+              />
+            </div>
+          )}
+                
+          {/* CTA Button */}
+          <motion.button 
+            className="bg-accent-electric-cyan hover:bg-accent-electric-cyan/90 text-midnight-obsidian px-4 py-2 rounded-full text-xs font-bold transition-all"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Evaluate Code
+          </motion.button>
+        </div>
+      </motion.nav>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-7xl mx-auto px-6 pt-24 pb-24">
         <motion.div variants={contentVariants}>
           {!showDashboard ? (
             /* Evaluation Interface */
@@ -344,28 +382,30 @@ const App: React.FC = () => {
         </motion.div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-obsidian-secondary/70 border-t border-white/10 mt-16">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="font-helvetica text-text-primary font-semibold mb-2">
-                LINT-PRO v2.0.0
-              </h3>
-              <p className="font-garamond text-text-secondary-muted text-sm">
-                Precision Engineering for Code Quality Evaluation
-              </p>
-            </div>
-
-            <div className="flex flex-col items-center md:items-end gap-2">
-              <div className="flex items-center gap-6 text-sm text-text-secondary-muted">
-                <span>Logic Gates: AST Analysis • Edge Cases • Explainability</span>
-              </div>
-              <div className="flex items-center gap-6 text-sm text-text-secondary-muted">
-                <span>Scoring: 40% Correctness • 30% Efficiency • 20% Readability • 10% Best Practices</span>
-              </div>
-            </div>
+      {/* Floating Footer */}
+      <footer className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40
+                        w-[70%] max-w-4xl px-6 py-4
+                        bg-midnight-obsidian/10 backdrop-blur-lg
+                        border border-white/10 rounded-full
+                        flex items-center justify-between
+                        shadow-2xl shadow-black/30">
+        <div className="flex items-center gap-6">
+          <div className="font-garamond italic text-lg font-bold text-text-header">
+            LINT-PRO
           </div>
+          <div className="flex items-center gap-4 text-sm text-text-secondary-muted">
+            <span>v2.0.0</span>
+            <span>•</span>
+            <span>Precision Engineering</span>
+          </div>
+        </div>
+              
+        <div className="flex items-center gap-6 text-xs text-text-secondary-muted">
+          <span>AST Analysis</span>
+          <span>•</span>
+          <span>Edge Cases</span>
+          <span>•</span>
+          <span>Explainability</span>
         </div>
       </footer>
     </motion.div>

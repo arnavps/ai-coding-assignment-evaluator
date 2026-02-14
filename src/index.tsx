@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import EnhancedApp from './components/EnhancedApp';
 import './index.css';
 
 /**
  * Application Entry Point
- * LINT-PRO AI Coding Evaluator
+ * LINT-PRO v2.1.0 - Professional IDE Dashboard with Enhanced UI
  * 
  * @author Lead Software Architect
- * @version 2.0.0
+ * @version 2.1.0
  */
 
 const root = ReactDOM.createRoot(
@@ -17,6 +17,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <EnhancedApp />
   </React.StrictMode>
 );

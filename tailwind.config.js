@@ -6,14 +6,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'midnight-obsidian': '#0B0B0B',
-        'obsidian-secondary': '#1A1A1A',
-        'text-primary': '#FFFFFF',
-        'text-secondary': '#B0B0B0',
-        'border-default': '#333333',
+        'midnight-obsidian': '#121212',
+        'obsidian-secondary': '#1E1E1E',
+        'text-primary': '#E0E0E0',
+        'text-secondary': 'rgba(176, 176, 176, 0.87)',
+        'text-header': 'rgba(224, 224, 224, 0.87)',
+        'text-secondary-muted': 'rgba(176, 176, 176, 0.60)',
+        'text-disabled': 'rgba(176, 176, 176, 0.38)',
+        'border-default': '#2D2D2D',
         'success': '#00FF94',
         'warning': '#FFD600',
         'error': '#FF0055',
+        'accent-electric-cyan': '#00FFFF',
+        'accent-neon-green': '#39FF14',
       },
       fontFamily: {
         'helvetica': ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],

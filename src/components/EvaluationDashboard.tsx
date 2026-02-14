@@ -32,7 +32,7 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
     sections.forEach((section, index) => {
       setTimeout(() => {
         setVisibleSections(prev => new Set(prev).add(section));
-        
+
         // Start typing effect for mentorship text
         if (section === 'bestPractices') {
           startTypingEffect(section, getMentorshipText(result));
@@ -60,7 +60,7 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
   // Get mentorship text based on results
   const getMentorshipText = (result: EvaluationResult): string => {
     const { grade, overallScore } = result;
-    
+
     if (grade === 'A') {
       return `Exceptional work! Your code demonstrates professional-level quality with a score of ${overallScore}/100. The architecture is clean, performance is optimized, and best practices are well implemented. Consider mentoring others and contributing to open-source projects.`;
     } else if (grade === 'B') {
@@ -155,7 +155,7 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
                       {result.overallScore}/100
                     </span>
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div className="flex items-center gap-2">
                       <span className="text-text-secondary">Correctness:</span>
@@ -188,7 +188,7 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
               {/* Action Button */}
               <button
                 onClick={onNewEvaluation}
-                className="px-6 py-3 bg-success text-midnight-obsidian font-helvetica font-semibold rounded-lg hover:bg-success/90 transition-colors"
+                className="btn-electric-cyan"
               >
                 Evaluate New Code
               </button>
@@ -210,7 +210,7 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
             <h3 className="text-xl font-bold font-helvetica text-text-primary mb-4">
               Correctness Analysis (40%)
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center">
                 <div className={`text-3xl font-bold font-helvetica ${getScoreColor(result.correctness.score)}`}>
@@ -218,14 +218,14 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
                 </div>
                 <div className="text-text-secondary text-sm mt-1">Test Pass Rate</div>
               </div>
-              
+
               <div className="text-center">
                 <div className="text-3xl font-bold font-helvetica text-success">
                   {result.correctness.testResults.filter(t => t.passed).length}
                 </div>
                 <div className="text-text-secondary text-sm mt-1">Tests Passed</div>
               </div>
-              
+
               <div className="text-center">
                 <div className="text-3xl font-bold font-helvetica text-warning">
                   {result.correctness.silentFailures.length}
@@ -269,7 +269,7 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
             <h3 className="text-xl font-bold font-helvetica text-text-primary mb-4">
               Efficiency Analysis (30%)
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Complexity Metrics */}
               <div>
@@ -338,7 +338,7 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
             <h3 className="text-xl font-bold font-helvetica text-text-primary mb-4">
               Readability Analysis (20%)
             </h3>
-            
+
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
               <div>
                 <div className="text-2xl font-bold font-helvetica text-text-primary">
@@ -382,7 +382,7 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
             <h3 className="text-xl font-bold font-helvetica text-text-primary mb-4">
               Senior Developer Mentorship
             </h3>
-            
+
             {/* Typing Effect for Mentorship Text */}
             <div className="mb-6 p-6 bg-midnight-obsidian rounded-lg border-l-4 border-success">
               <div className="font-garamond text-text-primary leading-relaxed text-lg">
@@ -421,21 +421,20 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
             <h3 className="text-xl font-bold font-helvetica text-text-primary mb-4">
               Technical Debt Analysis
             </h3>
-            
+
             <div className="flex items-center justify-between mb-6">
               <div>
-                <div className={`text-3xl font-bold font-helvetica ${
-                  result.technicalDebt.level === 'low' ? 'text-success' :
-                  result.technicalDebt.level === 'medium' ? 'text-warning' :
-                  result.technicalDebt.level === 'high' ? 'text-error' : 'text-error'
-                }`}>
+                <div className={`text-3xl font-bold font-helvetica ${result.technicalDebt.level === 'low' ? 'text-success' :
+                    result.technicalDebt.level === 'medium' ? 'text-warning' :
+                      result.technicalDebt.level === 'high' ? 'text-error' : 'text-error'
+                  }`}>
                   {result.technicalDebt.score}%
                 </div>
                 <div className="text-text-secondary mt-1">
                   {result.technicalDebt.level.toUpperCase()} • {result.technicalDebt.estimatedHours}h to resolve
                 </div>
               </div>
-              
+
               {/* Technical Debt Gauge */}
               <div className="relative w-32 h-32">
                 <svg className="transform -rotate-90 w-32 h-32">
@@ -457,19 +456,17 @@ const EvaluationDashboard: React.FC<EvaluationDashboardProps> = ({
                     fill="none"
                     strokeDasharray={`${2 * Math.PI * 56}`}
                     strokeDashoffset={`${2 * Math.PI * 56 * (1 - result.technicalDebt.score / 100)}`}
-                    className={`transition-all duration-1000 ${
-                      result.technicalDebt.level === 'low' ? 'text-success' :
-                      result.technicalDebt.level === 'medium' ? 'text-warning' :
-                      result.technicalDebt.level === 'high' ? 'text-error' : 'text-error'
-                    }`}
+                    className={`transition-all duration-1000 ${result.technicalDebt.level === 'low' ? 'text-success' :
+                        result.technicalDebt.level === 'medium' ? 'text-warning' :
+                          result.technicalDebt.level === 'high' ? 'text-error' : 'text-error'
+                      }`}
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className={`text-2xl font-bold font-helvetica ${
-                    result.technicalDebt.level === 'low' ? 'text-success' :
-                    result.technicalDebt.level === 'medium' ? 'text-warning' :
-                    result.technicalDebt.level === 'high' ? 'text-error' : 'text-error'
-                  }`}>
+                  <span className={`text-2xl font-bold font-helvetica ${result.technicalDebt.level === 'low' ? 'text-success' :
+                      result.technicalDebt.level === 'medium' ? 'text-warning' :
+                        result.technicalDebt.level === 'high' ? 'text-error' : 'text-error'
+                    }`}>
                     {result.technicalDebt.score}%
                   </span>
                 </div>

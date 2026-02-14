@@ -15,14 +15,19 @@
 
 /* CSS Variables for Design System */
 :root {
-  --color-midnight-obsidian: #0B0B0B;
-  --color-obsidian-secondary: #1A1A1A;
-  --color-text-primary: #FFFFFF;
-  --color-text-secondary: #B0B0B0;
-  --color-border-default: #333333;
+  --color-midnight-obsidian: #121212;
+  --color-obsidian-secondary: #1E1E1E;
+  --color-text-primary: #E0E0E0;
+  --color-text-secondary: rgba(176, 176, 176, 0.87);
+  --color-text-header: rgba(224, 224, 224, 0.87);
+  --color-text-secondary-muted: rgba(176, 176, 176, 0.60);
+  --color-text-disabled: rgba(176, 176, 176, 0.38);
+  --color-border-default: #2D2D2D;
   --color-success: #00FF94;
   --color-warning: #FFD600;
   --color-error: #FF0055;
+  --color-accent-electric-cyan: #00FFFF;
+  --color-accent-neon-green: #39FF14;
 }
 
 /* Base Styles */
@@ -189,7 +194,7 @@ textarea:focus {
 
 /* Glass Effect */
 .glass-effect {
-  background: rgba(26, 26, 26, 0.8);
+  background: rgba(30, 30, 30, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -224,6 +229,14 @@ code {
   @apply btn-base bg-success text-midnight-obsidian hover:bg-success/90 hover:scale-105 active:scale-95;
 }
 
+.btn-electric-cyan {
+  @apply btn-base bg-accent-electric-cyan text-midnight-obsidian hover:bg-accent-electric-cyan/90 hover:scale-105 active:scale-95 shadow-lg shadow-accent-electric-cyan/30;
+}
+
+.btn-neon-green {
+  @apply btn-base bg-accent-neon-green text-midnight-obsidian hover:bg-accent-neon-green/90 hover:scale-105 active:scale-95 shadow-lg shadow-accent-neon-green/30;
+}
+
 .btn-secondary {
   @apply btn-base bg-border-default text-text-primary hover:bg-text-secondary hover:bg-opacity-20;
 }
@@ -238,7 +251,7 @@ code {
 }
 
 .card-hover {
-  @apply card hover:border-success hover:shadow-lg hover:shadow-success/20 transition-all duration-300;
+  @apply card hover:border-success transition-all duration-300;
 }
 
 /* Status Indicators */
@@ -256,6 +269,35 @@ code {
 
 .status-secondary {
   @apply text-text-secondary;
+}
+
+/* Text Opacity Utilities */
+.text-header {
+  color: var(--color-text-header);
+}
+
+.text-secondary-muted {
+  color: var(--color-text-secondary-muted);
+}
+
+.text-disabled {
+  color: var(--color-text-disabled);
+}
+
+.accent-electric-cyan {
+  color: var(--color-accent-electric-cyan);
+}
+
+.bg-accent-electric-cyan {
+  background-color: var(--color-accent-electric-cyan);
+}
+
+.accent-neon-green {
+  color: var(--color-accent-neon-green);
+}
+
+.bg-accent-neon-green {
+  background-color: var(--color-accent-neon-green);
 }
 
 /* Loading States */

@@ -109,14 +109,14 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
   return (
     <div className={`
       relative bg-midnight-obsidian border-2 rounded-xl overflow-hidden transition-all duration-300
-      ${focused ? 'border-success shadow-lg shadow-success/20' : 'border-border-default'}
+      ${focused ? 'border-white/20 shadow-lg shadow-white/10' : 'border-white/10'}
       ${disabled ? 'opacity-70' : ''}
     `}>
       {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 bg-obsidian-secondary border-b border-border-default">
+      <div className="flex items-center justify-between px-6 py-4 bg-obsidian-secondary/70 border-b border-white/10">
         <div className="flex items-center gap-3">
           <span className="text-success font-mono text-lg">{'</>'}</span>
-          <span className="font-helvetica text-text-primary font-semibold">
+          <span className="font-helvetica text-text-header font-semibold">
             Code Input
           </span>
         </div>
@@ -141,8 +141,8 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       <div className="relative">
         <div className="flex">
           {/* Line Numbers */}
-          <div className="px-4 py-4 bg-midnight-obsidian border-r border-border-default select-none">
-            <pre className="font-mono text-sm text-text-secondary leading-6">
+          <div className="px-4 py-4 bg-midnight-obsidian border-r border-white/10 select-none">
+            <pre className="font-mono text-sm text-text-secondary-muted leading-6">
               {generateLineNumbers()}
             </pre>
           </div>
@@ -160,7 +160,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
               className={`
                 w-full h-96 px-4 py-4 bg-midnight-obsidian text-text-primary
                 font-mono text-sm leading-6 resize-none outline-none
-                placeholder-text-secondary/50
+                placeholder-text-secondary-muted
                 ${disabled ? 'cursor-not-allowed' : 'cursor-text'}
               `}
               placeholder="Enter your JavaScript code here..."
@@ -179,7 +179,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  className="absolute inset-0 bg-midnight-obsidian/95 backdrop-blur-sm flex flex-col items-center justify-center z-10"
+                  className="absolute inset-0 bg-obsidian-secondary/95 backdrop-blur-sm flex flex-col items-center justify-center z-10"
                 >
                   {/* Scanning Loader */}
                   <div className="relative mb-6">
@@ -211,24 +211,24 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between px-6 py-3 bg-obsidian-secondary border-t border-border-default">
+      <div className="flex items-center justify-between px-6 py-3 bg-obsidian-secondary/70 border-t border-white/10">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <span className="font-helvetica text-text-secondary text-sm">Lines:</span>
+            <span className="font-helvetica text-text-secondary-muted text-sm">Lines:</span>
             <span className="font-mono text-text-primary text-sm font-medium">{lineCount}</span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="font-helvetica text-text-secondary text-sm">Characters:</span>
+            <span className="font-helvetica text-text-secondary-muted text-sm">Characters:</span>
             <span className="font-mono text-text-primary text-sm font-medium">{characterCount}</span>
           </div>
         </div>
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${focused ? 'bg-success' : 'bg-text-secondary'
+            <div className={`w-2 h-2 rounded-full ${focused ? 'bg-success' : 'text-disabled'
               }`} />
-            <span className="font-helvetica text-text-secondary text-sm">
+            <span className="font-helvetica text-text-secondary-muted text-sm">
               {focused ? 'Focused' : 'Not Focused'}
             </span>
           </div>
@@ -236,7 +236,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
           {value.length > 0 && (
             <button
               onClick={() => onChange('')}
-              className="font-helvetica text-text-secondary hover:text-error text-sm font-medium transition-colors"
+              className="font-helvetica text-text-secondary-muted hover:text-error text-sm font-medium transition-colors"
             >
               Clear
             </button>

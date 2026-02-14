@@ -22,7 +22,7 @@ import { Submission } from '@/types';
 const App: React.FC = () => {
   const [code, setCode] = useState<string>('');
   const [showDashboard, setShowDashboard] = useState<boolean>(false);
-  
+
   const {
     state,
     currentPhase,
@@ -89,7 +89,7 @@ const App: React.FC = () => {
   
   return [];
 }`,
-    
+
     nestedLoops: `function findPairs(arr, target) {
   const pairs = [];
   
@@ -104,7 +104,7 @@ const App: React.FC = () => {
   
   return pairs;
 }`,
-    
+
     poorNaming: `function x(a, b) {
   let temp = 0;
   let data = [];
@@ -170,7 +170,7 @@ const App: React.FC = () => {
       {/* Header */}
       <motion.header
         variants={headerVariants}
-        className="bg-obsidian-secondary border-b border-border-default sticky top-0 z-50 backdrop-blur-sm"
+        className="bg-obsidian-secondary/70 border-b border-white/10 sticky top-0 z-50 backdrop-blur-sm"
       >
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
@@ -178,24 +178,23 @@ const App: React.FC = () => {
               <h1 className="text-4xl font-bold bg-gradient-to-r from-success to-warning bg-clip-text text-transparent">
                 LINT-PRO
               </h1>
-              <p className="font-garamond text-text-secondary mt-2 text-lg">
+              <p className="font-garamond text-text-secondary-muted mt-2 text-lg">
                 Production-ready AI Coding Evaluator with Precision Engineering
               </p>
             </div>
-            
+
             {/* Status Indicator */}
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className={`w-3 h-3 rounded-full ${
-                  state === 'idle' ? 'bg-text-secondary' :
-                  state === 'completed' ? 'bg-success' :
-                  state === 'error' ? 'bg-error' : 'bg-warning animate-pulse'
-                }`} />
+                <div className={`w-3 h-3 rounded-full ${state === 'idle' ? 'bg-text-secondary' :
+                    state === 'completed' ? 'bg-success' :
+                      state === 'error' ? 'bg-error' : 'bg-warning animate-pulse'
+                  }`} />
                 <span className="text-text-secondary text-sm font-medium">
                   {statusMessage}
                 </span>
               </div>
-              
+
               {progress > 0 && progress < 100 && (
                 <div className="w-32 h-2 bg-border-default rounded-full overflow-hidden">
                   <motion.div
@@ -223,8 +222,8 @@ const App: React.FC = () => {
                   Advanced Code Analysis
                 </h2>
                 <p className="font-garamond text-text-secondary text-lg max-w-3xl mx-auto leading-relaxed">
-                  Experience the future of code evaluation with our precision engineering approach. 
-                  Our AI-powered engine analyzes your code through multiple dimensions: 
+                  Experience the future of code evaluation with our precision engineering approach.
+                  Our AI-powered engine analyzes your code through multiple dimensions:
                   correctness, efficiency, readability, and best practices.
                 </p>
               </div>
@@ -249,7 +248,7 @@ const App: React.FC = () => {
                     px-8 py-4 font-helvetica font-semibold rounded-lg transition-all duration-300
                     ${isProcessing || !code.trim()
                       ? 'bg-text-secondary/20 text-text-secondary/50 cursor-not-allowed'
-                      : 'bg-success text-midnight-obsidian hover:bg-success/90 hover:scale-105 active:scale-95'
+                      : 'btn-electric-cyan'
                     }
                   `}
                   whileHover={!isProcessing && code.trim() ? { scale: 1.05 } : {}}
@@ -304,30 +303,30 @@ const App: React.FC = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6 }}
-                  className="bg-obsidian-secondary border border-border-default rounded-xl p-8"
+                  className="bg-obsidian-secondary/70 border border-white/10 rounded-xl p-8"
                 >
                   <h3 className="text-xl font-bold font-helvetica text-text-primary mb-6">
                     Try Sample Code
                   </h3>
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {Object.entries(sampleCode).map(([key, sample]) => (
                       <motion.button
                         key={key}
                         onClick={() => setCode(sample)}
-                        className="p-4 bg-midnight-obsidian border border-border-default rounded-lg hover:border-success hover:bg-success/5 transition-all duration-300 text-left"
+                        className="p-4 bg-obsidian-secondary/50 border border-white/10 rounded-lg hover:border-white/20 hover:bg-white/5 transition-all duration-300 text-left"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                       >
                         <h4 className="font-helvetica text-text-primary font-semibold mb-2">
                           {key === 'twoSum' ? 'Two Sum (Optimal)' :
-                           key === 'nestedLoops' ? 'Nested Loops (O(n²))' :
-                           'Poor Naming'}
+                            key === 'nestedLoops' ? 'Nested Loops (O(n²))' :
+                              'Poor Naming'}
                         </h4>
                         <p className="font-garamond text-text-secondary text-sm">
                           {key === 'twoSum' ? 'Optimal O(n) solution with hash map' :
-                           key === 'nestedLoops' ? 'Inefficient O(n²) nested loops' :
-                           'Code with naming issues'}
+                            key === 'nestedLoops' ? 'Inefficient O(n²) nested loops' :
+                              'Code with naming issues'}
                         </p>
                       </motion.button>
                     ))}
@@ -346,23 +345,23 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-obsidian-secondary border-t border-border-default mt-16">
+      <footer className="bg-obsidian-secondary/70 border-t border-white/10 mt-16">
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h3 className="font-helvetica text-text-primary font-semibold mb-2">
                 LINT-PRO v2.0.0
               </h3>
-              <p className="font-garamond text-text-secondary text-sm">
+              <p className="font-garamond text-text-secondary-muted text-sm">
                 Precision Engineering for Code Quality Evaluation
               </p>
             </div>
-            
+
             <div className="flex flex-col items-center md:items-end gap-2">
-              <div className="flex items-center gap-6 text-sm text-text-secondary">
+              <div className="flex items-center gap-6 text-sm text-text-secondary-muted">
                 <span>Logic Gates: AST Analysis • Edge Cases • Explainability</span>
               </div>
-              <div className="flex items-center gap-6 text-sm text-text-secondary">
+              <div className="flex items-center gap-6 text-sm text-text-secondary-muted">
                 <span>Scoring: 40% Correctness • 30% Efficiency • 20% Readability • 10% Best Practices</span>
               </div>
             </div>
